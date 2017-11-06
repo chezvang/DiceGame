@@ -178,7 +178,6 @@ function offensePlayer(fieldData, currentDownData, firstDownChecker){
 	let fieldPosition = fieldData;
 	let currentDown = currentDownData;
 	let firstDownCheck = firstDownChecker;
-	let roll;
 
 	console.log("Offense is starting at the " + fieldPosition + " yard line.");
 	alert("Offense is starting at the " + fieldPosition + " yard line.");
@@ -188,7 +187,7 @@ function offensePlayer(fieldData, currentDownData, firstDownChecker){
 	alert("Offense has " + firstDownCheck + " yards to go until a 1st down.");
 	
 	option = fourDice();
-	switch(roll){
+	switch(option){
 		case 2:
 			console.log("Roll is 2: Short Pass");
 			alert("Roll is 2: Short Pass");
