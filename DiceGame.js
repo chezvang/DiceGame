@@ -178,6 +178,7 @@ function offensePlayer(fieldData, currentDownData, firstDownChecker){
 	let fieldPosition = fieldData;
 	let currentDown = currentDownData;
 	let firstDownCheck = firstDownChecker;
+	let roll;
 
 	console.log("Offense is starting at the " + fieldPosition + " yard line.");
 	alert("Offense is starting at the " + fieldPosition + " yard line.");
@@ -187,7 +188,7 @@ function offensePlayer(fieldData, currentDownData, firstDownChecker){
 	alert("Offense has " + firstDownCheck + " yards to go until a 1st down.");
 	
 	option = fourDice();
-	switch(option){
+	switch(roll){
 		case 2:
 			console.log("Roll is 2: Short Pass");
 			alert("Roll is 2: Short Pass");
@@ -330,7 +331,7 @@ function firstDownCalc(firstDownChecker, resolutionYards){
 			fieldGoalAttempt = null;
 			console.log("You're going to kick it.")
 			alert("You're going to kick it. Say yes.")
-			toFirstDown();
+			firstDownCalc();
 			return fieldGoalAttempt;
 		}
 		else {
@@ -369,8 +370,5 @@ function victoryCondition(){
 	console.log("Yay, you win. The game will end now. Console log will show errors.");
 	endGame();
 }
-
-// function endGame(){
-// }
 
 coinToss();
