@@ -270,24 +270,25 @@ function playResolution(defenseHolder, offenseHolder, fieldData, currentDownData
 		console.log("Total gain of " + totalYards + " yards!");
 		alert("Total gain of " + totalYards + " yards!");
 
-		currentPosition(fieldData, totalYards);
-		firstDownCalc(currentDown, firstDownCheck, totalYards);
+		fieldPosition = currentPosition(fieldData, totalYards);
+		currentDown = firstDownCalc(currentDown, firstDownCheck, totalYards);
 		touchDownCheck(fieldPosition);
 	}
 	else if(totalYards < 0){
 		console.log("Loss of " + totalYards + " yards!");
 		alert("Loss of " + totalYards + " yards!");
-		fieldPosition = totalYards + fieldPosition;
-		playDownCheck(totalYards);
-		currentPosition(fieldPosition);
-		touchDownCheck(startFieldPosition);
+		
+		fieldPosition = currentPosition(fieldData, totalYards);
+		currentDown = firstDownCalc(currentDown, firstDownCheck, totalYards);
+		touchDownCheck(fieldPosition);
 	}
 	else {
-		startFieldPosition = startFieldPosition - 0
 		console.log("No gain.");
 		alert("No gain.")
-		currentPosition(fieldPosition);
-		touchDownCheck(startFieldPosition);
+		
+		fieldPosition = currentPosition(fieldData, totalYards);
+		currentDown = firstDownCalc(currentDown, firstDownCheck, totalYards);
+		touchDownCheck(fieldPosition);
 	}
 	offensePlayer(fieldPosition, currentDown, firstDownCheck);
 }
@@ -298,13 +299,13 @@ function currentPosition(fieldData, resolutionYards){
 
 	currentPosition = currentPosition + yards;
 	console.log("The Offense is at the " + currentPosition + " yard line.");
-	return (currentPosition, yards);
+	return (currentPosition);
 }
 
 function firstDownCalc(currentDownData, firstDownChecker, resolutionYards){
-	let yards = resolutionYards;
 	let currentDown = currentDownData;
 	let firstDownCheck = firstDownChecker;
+	let yards = resolutionYards;
 
 	firstDownCheck = firstDownCheck - yards;
 
@@ -312,29 +313,33 @@ function firstDownCalc(currentDownData, firstDownChecker, resolutionYards){
 		console.log("Offense converts a First Down!");
 		firstDownCheck = 10;
 		currentDown = 1;
-		return (currentDown, firstDownCheck, yards);
+		return (currentDown);
 	}
 	else {
 		currentDown ++;
-		console.log("It's currently " + firstDownCheck + " Down.");
-		return (currentDown, firstDownCheck, yards);
+		console.log("It's currently " + currentDown + " Down.");
+		return (currentDown);
 	}
 }
 
+// function toFirstDown(){
+
+// }
+
 function touchDownCheck(fieldData){
 	let currentPosition = fieldData;
-	let score = 0;
+	// let score = 0;
 	let touchDown;
 
 	if(currentPosition >= 100){
 		console.log("TOUCHDOWN!");
 		alert("TOUCHDOWN!");
-		score = 1;
+		// score = 1;
 		currentPosition = 20;
 		victoryCondition();
 	}
 	else {
-		return (currentPosition);
+		return currentPosition;
 	}
 }
 
@@ -356,6 +361,7 @@ function victoryCondition(){
 
 function endGame(){
 	alert("Yay, you win. Exit to end game.");
+	console.log("Yay, you win. Exit to end the game.")
 }
 
 coinToss();
