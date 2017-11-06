@@ -5,8 +5,9 @@ function startGame(){
 	let coin;
 	if (coinDecision === null || coinDecision === "") {
 		coin = null;
-		console.log("Please enter Heads or Tails.")
-		alert("Please enter Heads or Tails.")
+		alert("All prompts appear in log and console.");
+		console.log("Please enter Heads or Tails.");
+		alert("Please enter Heads or Tails.");
 		startGame();
 		return coin;
 	}
@@ -313,8 +314,6 @@ function toFirstDown(currentDownData, firstDownChecker, resolutionYards){
 	}
 	else {
 		currentDown ++;
-		console.log("It's currently " + currentDown + " Down.");
-		alert("It's currently " + currentDown + " Down.");
 		return (currentDown);
 	}
 }
