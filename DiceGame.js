@@ -1,11 +1,11 @@
 //Dice Game
 
 function startGame(){
+	alert("All prompts appear in log and console. Press OK to continue.");
 	let coinDecision = prompt("Heads or Tails?");
 	let coin;
 	if (coinDecision === null || coinDecision === "") {
 		coin = null;
-		alert("All prompts appear in log and console.");
 		console.log("Please enter Heads or Tails.");
 		alert("Please enter Heads or Tails.");
 		startGame();
