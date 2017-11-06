@@ -14,10 +14,11 @@
 // console.log("outside loop");
 // ^ while loop for game ^
 
+// let victoryCondition = false;
+
 function startGame(){
 	let coinDecision = prompt("Heads or Tails?");
 	let coin;
-
 	if (coinDecision === null || coinDecision === "") {
 		coin = null;
 		console.log("Please enter Heads or Tails.")
@@ -45,272 +46,295 @@ function coinToss(){
 	if (coin === coinToss) {
 		console.log("The coin toss is heads. Player One, you start on offense.");
 		alert("The coin toss is heads. Player One, you start on offense.");
-		offensePlayer();
+		offensePlayer(20, 1, 10);
+		// start offensePlayer with initial values, this will pass onto offense (starting)
 	}
 	else {
 		console.log("The coin toss is tails. Player One, you start on offense anyway.");
 		alert("The coin toss is tails. Player One, you start on offense anyway.");
-		offensePlayer();
+		offensePlayer(20, 1, 10);
 	}
 }
 
 function fourDice(){
 	let fourRoll = Math.floor(Math.random() * 4 + 1);
-	fourRoll = fourRoll * 10;
 	return fourRoll;
 }
 
 function sixDice(){
 	let sixRoll = Math.floor(Math.random() * 6 + 1);
-	sixRoll = sixRoll * 10;
 	return sixRoll;
 }
 
 function eightDice(){
 	let eightRoll = Math.floor(Math.random() * 8 + 1);
-	eightRoll = eightRoll * 10;
 	return eightRoll;
 }
 
 function tenDice(){
 	let tenRoll = Math.floor(Math.random() * 10 + 1);
-	tenRoll = tenRoll * 10;
 	return tenRoll;
 }
 
 function twelveDice(){
 	let twelveRoll = Math.floor(Math.random() * 12 + 1);
-	twelveRoll = twelveRoll * 10;
 	return twelveRoll;
 }
 
 function twentyDice(){
 	let twentyRoll = Math.floor(Math.random() * 20 + 1);
-	twentyRoll = twentyRoll * 2;
 	return twentyRoll;
 }
 
 //dice rolls ^^
 
-function offenseSixRoll(){
+function offenseSixRoll(fieldData, currentDownData, firstDownChecker){
 	let offenseSix = sixDice();
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
 	console.log("Attempt for " + offenseSix + " yards!");
-	alert("Attempt for " + offenseSix + " yards!");
-	offenseAttempt(offenseSix);
+	offenseAttempt(offenseSix, fieldPosition, currentDown, firstDownCheck);
 }
 
-function offenseEightRoll(){
+function offenseEightRoll(fieldData, currentDownData, firstDownChecker){
 	let offenseEight = eightDice();
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
 	console.log("Attempt for " + offenseEight + " yards!");
-	alert("Attempt for " + offenseEight + " yards!");
-	offenseAttempt(offenseEight);
+	offenseAttempt(offenseEight, fieldPosition, currentDown, firstDownCheck);
 }
 
-function offenseTenRoll(){
+function offenseTenRoll(fieldData, currentDownData, firstDownChecker){
 	let offenseTen = tenDice();
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
 	console.log("Attempt for " + offenseTen + " yards!");
-	alert("Attempt for " + offenseTen + " yards!");
-	offenseAttempt(offenseTen);
+	offenseAttempt(offenseTen, fieldPosition, currentDown, firstDownCheck);
 }
 
-function offenseTwelveRoll(){
+function offenseTwelveRoll(fieldData, currentDownData, firstDownChecker){
 	let offenseTwelve = twelveDice();
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
 	console.log("Attempt for " + offenseTwelve + " yards!");
-	alert("Attempt for " + offenseTwelve + " yards!");
-	offenseAttempt(offenseTwelve);
+	offenseAttempt(offenseTwelve, fieldPosition, currentDown, firstDownCheck);
 }
 
-function offenseAttempt(yards){ //placeholder for current yards in O drive
-	// let offenseYards = yards;
-	// playResolution(offenseYards);
-	// return offenseYards;
-	let offenseHold = yards;
-	defensePlayer(offenseHold);
-	return offenseHold;
+function offenseAttempt(yards, fieldData, currentDownData, firstDownChecker){
+	let offenseYards = yards;
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
+	defensePlayer(offenseYards, fieldPosition, currentDown, firstDownCheck);
+	return offenseYards;
 }
 
-function defenseSixRoll(offenseHold){
+function defenseSixRoll(offenseHold, fieldData, currentDownData, firstDownChecker){
 	let defenseSix = sixDice();
 	let offenseHolder = offenseHold;
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
 	console.log("Block for " + defenseSix + " yards!");
 	alert("Block for " + defenseSix + " yards!");
-	defenseAttempt(defenseSix, offenseHold);
+	defenseAttempt(defenseSix, offenseHold, fieldData, currentDownData, firstDownChecker);
 }
 
-function defenseEightRoll(offenseHold){
+function defenseEightRoll(offenseHold, fieldData, currentDownData, firstDownChecker){
 	let defenseEight = eightDice();
 	let offenseHolder = offenseHold;
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
 	console.log("Block for " + defenseEight + " yards!");
 	alert("Block for " + defenseEight + " yards!");
-	defenseAttempt(defenseEight, offenseHold);
+	defenseAttempt(defenseEight, offenseHold, fieldData, currentDownData, firstDownChecker);
 }
 
-function defenseTenRoll(offenseHold){
+function defenseTenRoll(offenseHold, fieldData, currentDownData, firstDownChecker){
 	let defenseTen = tenDice();
 	let offenseHolder = offenseHold;
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
 	console.log("Block for " + defenseTen + " yards!");
 	alert("Block for " + defenseTen + " yards!");
-	defenseAttempt(defenseTen, offenseHold);
+	defenseAttempt(defenseTen, offenseHold, fieldData, currentDownData, firstDownChecker);
 }
 
-function defenseTwelveRoll(offenseHold){
+function defenseTwelveRoll(offenseHold, fieldData, currentDownData, firstDownChecker){
 	let defenseTwelve = twelveDice();
 	let offenseHolder = offenseHold;
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
 	console.log("Block for " + defenseTwelve + " yards!");
 	alert("Block for " + defenseTwelve + " yards!");
-	defenseAttempt(defenseTwelve, offenseHold);
+	defenseAttempt(defenseTwelve, offenseHold, fieldData, currentDownData, firstDownChecker);
 }
 
-function defenseAttempt(yards, offenseHold){ //placeholder for current defense yards
+function defenseAttempt(yards, offenseHold, fieldData, currentDownData, firstDownChecker){
 	let defenseYards = yards;
 	let offenseHolder = offenseHold;
-	playResolution(defenseYards, offenseHolder);
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
+	playResolution(defenseYards, offenseHolder, fieldData, currentDownData, firstDownChecker);
 	return defenseYards;
 }
 
-function offensePlayer(){
+function offensePlayer(fieldData, currentDownData, firstDownChecker){
 	let option;
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
+	//this function will start with all values, starting/current field position, first down, first down counter
 
-	console.log("Rolling for Play.");
-	alert("Rolling for option.");
+	console.log("Offense is starting at the " + fieldPosition + " yard line.");
+	console.log("Current down: " + currentDown + ".");
+	console.log("Offense has " + firstDownCheck + " yards to go until a 1st down.");
+	// console.log("Rolling for Play.");
+	// alert("Rolling for option.");
 	option = fourDice();
 	switch(option){
 		case 2:
 			console.log("Roll is 2: Short Pass");
 			alert("Roll is 2: Short Pass");
-			offenseEightRoll();
+			offenseEightRoll(fieldPosition, currentDown, firstDownCheck);
 			break;
 		case 3:
 			console.log("Roll is a 3: Long Rush");
 			alert("Roll is a 3: Long Rush");
-			offenseTenRoll();
+			offenseTenRoll(fieldPosition, currentDown, firstDownCheck);
 			break;
 		case 4:
 			console.log("Roll is a 4: Long Pass");
 			alert("Roll is a 4: Long Pass");
-			offenseTwelveRoll();
+			offenseTwelveRoll(fieldPosition, currentDown, firstDownCheck);
 			break;
 		default:
 			console.log("Roll is a 1: Short Rush");
 			alert("Roll is a 1: Short Rush");
-			offenseSixRoll();
+			offenseSixRoll(fieldPosition, currentDown, firstDownCheck);
 			break;
 	}
 }
 
-function defensePlayer(offenseHold){
+function defensePlayer(offenseHold, fieldData, currentDownData, firstDownChecker){
 	let option;
-	let offensePlaceHold = offenseHold 
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
+	let offensePlaceHold = offenseHold;
 
 	option = fourDice();
 	switch(option){
 		case 2:
-			// alert("Short pass coverage.");
-			// console.log("Get ready for a short pass coverage.");
 			console.log("Opponent rolls 2: Short Pass Cover");
-			defenseEightRoll(offensePlaceHold);
+			alert("Opponent rolls 2: Short Pass Cover");
+			defenseEightRoll(offenseHold, fieldData, currentDownData, firstDownChecker);
 			break;
 		case 3:
-			// alert("Long rush coverage.");
-			// console.log("Get ready for a long rush coverage.");
 			console.log("Opponent rolls a 3: Long Rush Cover");
-			defenseTenRoll(offensePlaceHold);
+			alert("Opponent rolls a 3: Long Rush Cover");
+			defenseTenRoll(offenseHold, fieldData, currentDownData, firstDownChecker);
 			break;
 		case 4:
-			// alert("Long pass coverage.");
-			// console.log("Get ready for a long pass coverage.");
 			console.log("Opponent rolls a 4: Long Pass Cover");
-			defenseTwelveRoll(offensePlaceHold);
+			alert("Opponent rolls a 4: Long Pass Cover");
+			defenseTwelveRoll(offenseHold, fieldData, currentDownData, firstDownChecker);
 			break;
 		default:
-			// alert("Short rush coverage.");
-			// console.log("Get ready for a short rush coverage.");
 			console.log("Opponent rolls a 1: Short Rush Cover");
-			defenseSixRoll(offensePlaceHold);
+			alert("Opponent rolls a 1: Short Rush Cover");
+			defenseSixRoll(offenseHold, fieldData, currentDownData, firstDownChecker);
 			break;
 	}
 }
 
-function playResolution(defenseHolder, offenseHolder){
+function playResolution(defenseHolder, offenseHolder, fieldData, currentDownData, firstDownChecker){
 	let totalYards;
 	let offense = offenseHolder;//player
 	let defense = defenseHolder; //cpu
-	let fieldPosition = 20;
+	let fieldPosition = fieldData; //position on the field
+	let currentDown = currentDownData; //current play down
+	let firstDownCheck = firstDownChecker; //first down check
 
 	totalYards = offense - defense;
 
 	if(totalYards > 0){
 		console.log("Total gain of " + totalYards + " yards!");
 		alert("Total gain of " + totalYards + " yards!");
-		fieldPosition = fieldPosition + totalYards;
-		// playDownCheck(totalYards);
-		// currentPosition(fieldPosition);
+
+		currentPosition(fieldData, totalYards);
+		firstDownCalc(currentDown, firstDownCheck, totalYards);
 		touchDownCheck(fieldPosition);
-		offensePlayer();
 	}
 	else if(totalYards < 0){
 		console.log("Loss of " + totalYards + " yards!");
 		alert("Loss of " + totalYards + " yards!");
 		fieldPosition = totalYards + fieldPosition;
-		// playDownCheck(totalYards);
-		// currentPosition(fieldPosition);
-		touchDownCheck(fieldPosition);
-		offensePlayer();
+		playDownCheck(totalYards);
+		currentPosition(fieldPosition);
+		touchDownCheck(startFieldPosition);
 	}
 	else {
-		fieldPosition = fieldPosition - 0
+		startFieldPosition = startFieldPosition - 0
 		console.log("No gain.");
 		alert("No gain.")
-		// playDownCheck(0);
-		// currentPosition(fieldPosition);
-		touchDownCheck(fieldPosition);
-		offensePlayer();
+		currentPosition(fieldPosition);
+		touchDownCheck(startFieldPosition);
+	}
+	offensePlayer(fieldPosition, currentDown, firstDownCheck);
+}
+
+function currentPosition(fieldData, resolutionYards){
+	let currentPosition = fieldData;
+	let yards = resolutionYards;
+
+	currentPosition = currentPosition + yards;
+	console.log("The Offense is at the " + currentPosition + " yard line.");
+	return (currentPosition, yards);
+}
+
+function firstDownCalc(currentDownData, firstDownChecker, resolutionYards){
+	let yards = resolutionYards;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
+
+	firstDownCheck = firstDownCheck - yards;
+
+	if(firstDownCheck <= 0){
+		console.log("Offense converts a First Down!");
+		firstDownCheck = 10;
+		currentDown = 1;
+		return (currentDown, firstDownCheck, yards);
+	}
+	else {
+		currentDown ++;
+		console.log("It's currently " + firstDownCheck + " Down.");
+		return (currentDown, firstDownCheck, yards);
 	}
 }
 
-// function currentPosition(position){
-// 	let currentPosition = position;
-
-// 	console.log("You are at the " + currentPosition + " yard line.");
-// 	return currentPosition;
-// }
-
-// function playDownCheck(position){
-// 	let playDown = 1;
-// 	let firstDownYards = 10;
-// 	let yards = position;
-
-// 	firstDownYards = firstDownYards - yards;
-
-// 	if(firstDownYards <= 0){
-// 		console.log("First Down!");
-// 		firstDownYards = 10;
-// 		playDown = 1;
-// 		return (firstDownYards, playDown);
-// 	}
-// 	else {
-// 		playDown ++;
-// 		console.log("It's currently " + playDown + "nd Down.");
-// 		return playDown;
-// 	}
-// 	return (firstDownYards, playDown);
-// }
-
-function touchDownCheck(position){
-	let touchDown = 50;
-	let current = position;
+function touchDownCheck(fieldData){
+	let currentPosition = fieldData;
 	let score = 0;
+	let touchDown;
 
-	touchDown = touchDown - current;
-	console.log("You are at the " + touchDown + "yard line.");
-	alert("You are at the " + touchDown + "yard line.");
-	return touchDown;
-	if(touchDown < 1){
+	if(currentPosition >= 100){
 		console.log("TOUCHDOWN!");
 		alert("TOUCHDOWN!");
 		score = 1;
-		victoryCondition(score);
-		touchDown = 50;
+		currentPosition = 20;
+		victoryCondition();
+	}
+	else {
+		return (currentPosition);
 	}
 }
 
@@ -318,19 +342,20 @@ function touchDownCheck(position){
 
 // }
 
-function victoryCondition(score){
-	let victory = score;
+function victoryCondition(){
 
-	if(victory = 1){
-		endGame();
-	}
-	else {
-		offensePlayer();
-	}
+	endGame();
+
+	// if(victory = 1){
+	// 	endGame();
+	// }
+	// else {
+	// 	offensePlayer();
+	// }
 }
 
 function endGame(){
-	alert("Yay, you win.");
+	alert("Yay, you win. Exit to end game.");
 }
 
 coinToss();
