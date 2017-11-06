@@ -1,21 +1,5 @@
 //Dice Game
 
-// function endGame(){
-// let victoryCondition = false;
-// }
-
-// while(!victoryCondition){
-// 	for(let i = 0; i < 5; i++){
-// 		console.log("inside loop");
-// 	}
-// 	victoryCondition = true;
-// }
-
-// console.log("outside loop");
-// ^ while loop for game ^
-
-// let victoryCondition = false;
-
 function startGame(){
 	let coinDecision = prompt("Heads or Tails?");
 	let coin;
@@ -47,7 +31,6 @@ function coinToss(){
 		console.log("The coin toss is heads. Player One, you start on offense.");
 		alert("The coin toss is heads. Player One, you start on offense.");
 		offensePlayer(20, 1, 10);
-		// start offensePlayer with initial values, this will pass onto offense (starting)
 	}
 	else {
 		console.log("The coin toss is tails. Player One, you start on offense anyway.");
@@ -86,14 +69,13 @@ function twentyDice(){
 	return twentyRoll;
 }
 
-//dice rolls ^^
-
 function offenseSixRoll(fieldData, currentDownData, firstDownChecker){
 	let offenseSix = sixDice();
 	let fieldPosition = fieldData;
 	let currentDown = currentDownData;
 	let firstDownCheck = firstDownChecker;
 	console.log("Attempt for " + offenseSix + " yards!");
+	alert("Attempt for " + offenseSix + " yards!");
 	offenseAttempt(offenseSix, fieldPosition, currentDown, firstDownCheck);
 }
 
@@ -103,6 +85,7 @@ function offenseEightRoll(fieldData, currentDownData, firstDownChecker){
 	let currentDown = currentDownData;
 	let firstDownCheck = firstDownChecker;
 	console.log("Attempt for " + offenseEight + " yards!");
+	alert("Attempt for " + offenseEight + " yards!");
 	offenseAttempt(offenseEight, fieldPosition, currentDown, firstDownCheck);
 }
 
@@ -112,6 +95,7 @@ function offenseTenRoll(fieldData, currentDownData, firstDownChecker){
 	let currentDown = currentDownData;
 	let firstDownCheck = firstDownChecker;
 	console.log("Attempt for " + offenseTen + " yards!");
+	alert("Attempt for " + offenseTen + " yards!");
 	offenseAttempt(offenseTen, fieldPosition, currentDown, firstDownCheck);
 }
 
@@ -121,6 +105,7 @@ function offenseTwelveRoll(fieldData, currentDownData, firstDownChecker){
 	let currentDown = currentDownData;
 	let firstDownCheck = firstDownChecker;
 	console.log("Attempt for " + offenseTwelve + " yards!");
+	alert("Attempt for " + offenseTwelve + " yards!");
 	offenseAttempt(offenseTwelve, fieldPosition, currentDown, firstDownCheck);
 }
 
@@ -192,13 +177,14 @@ function offensePlayer(fieldData, currentDownData, firstDownChecker){
 	let fieldPosition = fieldData;
 	let currentDown = currentDownData;
 	let firstDownCheck = firstDownChecker;
-	//this function will start with all values, starting/current field position, first down, first down counter
 
 	console.log("Offense is starting at the " + fieldPosition + " yard line.");
+	alert("Offense is starting at the " + fieldPosition + " yard line.");
 	console.log("Current down: " + currentDown + ".");
+	alert("Current down: " + currentDown);
 	console.log("Offense has " + firstDownCheck + " yards to go until a 1st down.");
-	// console.log("Rolling for Play.");
-	// alert("Rolling for option.");
+	alert("Offense has " + firstDownCheck + " yards to go until a 1st down.");
+	
 	option = fourDice();
 	switch(option){
 		case 2:
@@ -258,11 +244,11 @@ function defensePlayer(offenseHold, fieldData, currentDownData, firstDownChecker
 
 function playResolution(defenseHolder, offenseHolder, fieldData, currentDownData, firstDownChecker){
 	let totalYards;
-	let offense = offenseHolder;//player
-	let defense = defenseHolder; //cpu
-	let fieldPosition = fieldData; //position on the field
-	let currentDown = currentDownData; //current play down
-	let firstDownCheck = firstDownChecker; //first down check
+	let offense = offenseHolder;
+	let defense = defenseHolder;
+	let fieldPosition = fieldData;
+	let currentDown = currentDownData;
+	let firstDownCheck = firstDownChecker;
 
 	totalYards = offense - defense;
 
@@ -272,7 +258,7 @@ function playResolution(defenseHolder, offenseHolder, fieldData, currentDownData
 
 		fieldPosition = currentPosition(fieldData, totalYards);
 		currentDown = firstDownCalc(currentDown, firstDownCheck, totalYards);
-		firstDownCheck = toFirstDown(currentDown, totalYards);
+		firstDownCheck = toFirstDown(currentDown, firstDownCheck, totalYards);
 		touchDownCheck(fieldPosition);
 	}
 	else if(totalYards < 0){
@@ -281,7 +267,7 @@ function playResolution(defenseHolder, offenseHolder, fieldData, currentDownData
 		
 		fieldPosition = currentPosition(fieldData, totalYards);
 		currentDown = firstDownCalc(currentDown, firstDownCheck, totalYards);
-		firstDownCheck = toFirstDown(currentDown, totalYards);
+		firstDownCheck = toFirstDown(currentDown, firstDownCheck, totalYards);
 		touchDownCheck(fieldPosition);
 	}
 	else {
@@ -289,8 +275,8 @@ function playResolution(defenseHolder, offenseHolder, fieldData, currentDownData
 		alert("No gain.")
 		
 		fieldPosition = currentPosition(fieldData, totalYards);
-		currentDown = firstDownCalc(currentDown, firstDownCheck, totalYards);
-		firstDownCheck = toFirstDown(currentDown, totalYards);
+		currentDown = firstDownCalc(firstDownCheck, totalYards);
+		firstDownCheck = toFirstDown(currentDown, firstDownCheck, totalYards);
 		touchDownCheck(fieldPosition);
 	}
 	offensePlayer(fieldPosition, currentDown, firstDownCheck);
@@ -302,18 +288,25 @@ function currentPosition(fieldData, resolutionYards){
 
 	currentPosition = currentPosition + yards;
 	console.log("The Offense is at the " + currentPosition + " yard line.");
+	alert("The Offense is at the " + currentPosition + " yard line.");
 	return (currentPosition);
 }
 
-function firstDownCalc(currentDownData, firstDownChecker, resolutionYards){
+function toFirstDown(currentDownData, firstDownChecker, resolutionYards){
 	let currentDown = currentDownData;
 	let firstDownCheck = firstDownChecker;
 	let yards = resolutionYards;
 
-	firstDownCheck = firstDownCheck - yards;
+	if(yards > 0){
+		firstDownCheck = firstDownCheck + yards;
+	}
+	else {
+		firstDownCheck = yards + firstDownCheck;
+	}
 
-	if(firstDownCheck <= 0){
+	if(firstDownCheck < 1){
 		console.log("Offense converts a First Down!");
+		alert("Offense converts a First Down!");
 		firstDownCheck = 10;
 		currentDown = 1;
 		return (currentDown);
@@ -321,16 +314,17 @@ function firstDownCalc(currentDownData, firstDownChecker, resolutionYards){
 	else {
 		currentDown ++;
 		console.log("It's currently " + currentDown + " Down.");
+		alert("It's currently " + currentDown + " Down.");
 		return (currentDown);
 	}
 }
 
-function toFirstDown(firstDownChecker, resolutionYards){
+function firstDownCalc(firstDownChecker, resolutionYards){
 	let toFirst = firstDownChecker;	
 	let yards = resolutionYards;
 	let rollResult;
 
-	if(currentDown = 4){
+	if(toFirst > 3){
 		let fieldGoalAttempt = prompt("Do you want to kick for the win?")
 
 		if (fieldGoalAttempt === null || fieldGoalAttempt === "") {
@@ -345,7 +339,8 @@ function toFirstDown(firstDownChecker, resolutionYards){
 			console.log("You choose to kick.");
 			alert("You choose to kick.");
 			rollResult = twentyDice() * 80;
-			console.log("Your kicker kicked for " + rollResult + "! What a leg!");
+			console.log("Your kicker kicked for " + rollResult + " yards! What a leg!");
+			alert("Your kicker kicked for " + rollResult + " yards! What a leg!")
 			touchDownCheck(rollResult);
 		}
 	}
@@ -357,13 +352,11 @@ function toFirstDown(firstDownChecker, resolutionYards){
 
 function touchDownCheck(fieldData){
 	let currentPosition = fieldData;
-	// let score = 0;
 	let touchDown;
 
 	if(currentPosition >= 100){
 		console.log("TOUCHDOWN!");
 		alert("TOUCHDOWN!");
-		// score = 1;
 		currentPosition = 20;
 		victoryCondition();
 	}
@@ -372,26 +365,13 @@ function touchDownCheck(fieldData){
 	}
 }
 
-// function puntBall(){
-
-// }
-
 function victoryCondition(){
 	alert("Yay, you win. Exit to end game.");
-	console.log("Yay, you win. Exit to end the game.")
+	console.log("Yay, you win. The game will end now. Console log will show errors.");
 	endGame();
 }
 
-	// if(victory = 1){
-	// 	endGame();
-	// }
-	// else {
-	// 	offensePlayer();
-	// }
-}
-
-func tion endGame(){
-	
-}
+// function endGame(){
+// }
 
 coinToss();
