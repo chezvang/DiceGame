@@ -272,6 +272,7 @@ function playResolution(defenseHolder, offenseHolder, fieldData, currentDownData
 
 		fieldPosition = currentPosition(fieldData, totalYards);
 		currentDown = firstDownCalc(currentDown, firstDownCheck, totalYards);
+		firstDownCheck = toFirstDown(currentDown, totalYards);
 		touchDownCheck(fieldPosition);
 	}
 	else if(totalYards < 0){
@@ -280,6 +281,7 @@ function playResolution(defenseHolder, offenseHolder, fieldData, currentDownData
 		
 		fieldPosition = currentPosition(fieldData, totalYards);
 		currentDown = firstDownCalc(currentDown, firstDownCheck, totalYards);
+		firstDownCheck = toFirstDown(currentDown, totalYards);
 		touchDownCheck(fieldPosition);
 	}
 	else {
@@ -288,6 +290,7 @@ function playResolution(defenseHolder, offenseHolder, fieldData, currentDownData
 		
 		fieldPosition = currentPosition(fieldData, totalYards);
 		currentDown = firstDownCalc(currentDown, firstDownCheck, totalYards);
+		firstDownCheck = toFirstDown(currentDown, totalYards);
 		touchDownCheck(fieldPosition);
 	}
 	offensePlayer(fieldPosition, currentDown, firstDownCheck);
@@ -322,9 +325,35 @@ function firstDownCalc(currentDownData, firstDownChecker, resolutionYards){
 	}
 }
 
-// function toFirstDown(){
+function toFirstDown(firstDownChecker, resolutionYards){
+	let toFirst = firstDownChecker;	
+	let yards = resolutionYards;
+	let rollResult;
 
-// }
+	if(currentDown = 4){
+		let fieldGoalAttempt = prompt("Do you want to kick for the win?")
+
+		if (fieldGoalAttempt === null || fieldGoalAttempt === "") {
+			fieldGoalAttempt = null;
+			console.log("You're going to kick it.")
+			alert("You're going to kick it. Say yes.")
+			toFirstDown();
+			return fieldGoalAttempt;
+		}
+		else {
+			fieldGoalAttempt = "Yes";
+			console.log("You choose to kick.");
+			alert("You choose to kick.");
+			rollResult = twentyDice() * 80;
+			console.log("Your kicker kicked for " + rollResult + "! What a leg!");
+			touchDownCheck(rollResult);
+		}
+	}
+	else {
+		toFirst++;
+		return (toFirst);
+	}
+}
 
 function touchDownCheck(fieldData){
 	let currentPosition = fieldData;
@@ -348,8 +377,10 @@ function touchDownCheck(fieldData){
 // }
 
 function victoryCondition(){
-
+	alert("Yay, you win. Exit to end game.");
+	console.log("Yay, you win. Exit to end the game.")
 	endGame();
+}
 
 	// if(victory = 1){
 	// 	endGame();
@@ -359,9 +390,8 @@ function victoryCondition(){
 	// }
 }
 
-function endGame(){
-	alert("Yay, you win. Exit to end game.");
-	console.log("Yay, you win. Exit to end the game.")
+func tion endGame(){
+	
 }
 
 coinToss();
